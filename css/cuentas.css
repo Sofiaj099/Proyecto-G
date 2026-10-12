@@ -1,0 +1,83 @@
+/* Estilos específicos para las tarjetas de Login y Registro */
+.inicio {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    margin-left: 260px; /* Deja espacio para tu barra lateral fija */
+    background: #f0f2f5;
+}
+
+.contenido-inicio h1 {
+    margin: 0 0 15px 0;
+    font-size: 32px;
+    color: #111b21;
+}
+
+.contenido-inicio {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+
+
+.contenido-inicio p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.boton:hover {
+    background: #008f72;
+}
+
+.boton {
+    width: 100%;
+    padding: 13px;
+    background: #00a884; 
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.campo {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.campo label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.campo input:focus {
+    border-color: #00a884;
+}
+
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+

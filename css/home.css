@@ -1,0 +1,62 @@
+/* Estilos específicos para el Panel del Docente (home.css) */
+
+.contenedor-panel {
+    margin-left: 260px; /* Deja espacio para la barra de navegación fija */
+    padding: 40px;
+    min-height: 100vh;
+    background: #f0f2f5;
+}
+
+.panel-header {
+    margin-bottom: 30px;
+}
+
+.panel-header h1 {
+    font-size: 28px;
+    color: #111b21;
+    margin-bottom: 8px;
+}
+
+.panel-header p {
+    color: #666;
+    font-size: 15px;
+    margin: 0;
+}
+
+.tarjeta-bienvenida {
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.tarjeta-bienvenida h2 {
+    color: #111b21;
+    margin-top: 0;
+    font-size: 22px;
+}
+
+.tarjeta-bienvenida p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Botón especial para cerrar sesión dentro del panel */
+.boton-cerrar-sesion {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ff4d4d;
+    color: white;
+    text-decoration: none;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+.boton-cerrar-sesion:hover {
+    background: #e03b3b;
+}

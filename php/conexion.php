@@ -1,19 +1,14 @@
 <?php
-
 $servidor = "localhost";
 $usuario = "root";
-$contraseña = "";
-$base_datos = "docentes";
+$password = "";
+$base_datos = "docentes"; // El nombre exacto de tu base de datos
 
-$conn = new mysqli(
-    $servidor,
-    $usuario,
-    $contraseña,
-    $base_datos
-);
+// Aquí creamos la variable $conexion que el registro necesita
+$conexion = new mysqli($servidor, $usuario, $password, $base_datos);
 
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+// Si hay un error de conexión, lo detenemos aquí
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
 }
-
 ?>

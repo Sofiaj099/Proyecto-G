@@ -1,129 +1,39 @@
-<?php
-
-include("php/conexion.php");
-
-$sql = "SELECT * FROM usuario";
-
-$resultado = $conn->query($sql);
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Tabla dinámica</title>
-
-    <link rel="stylesheet" href="css/estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organización Docente</title>
+    <!-- Vinculación limpia a tu carpeta de estilos -->
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/cuentas.css">
 
 </head>
 
 <body>
 
-    <h1>Agregar información</h1>
+ <dialog open style="padding: 20px; border-radius: 8px; border: 2px solid #7c3aed;">
+  <p>¡Este aviso aparece automáticamente al cargar la página!</p>
+  <button onclick="this.parentElement.close()">Cerrar</button>
+</dialog>
 
-
-    <!-- FORMULARIO -->
-
-    <form action="php/guardar.php" method="POST">
-
-        <label>Nombre:</label>
-
-        <input 
-            type="text"
-            name="nombre"
-            placeholder="Escriba un nombre"
-            required
-        >
-
-
-        <label>Número:</label>
-
-        <input 
-            type="number"
-            name="numero"
-            placeholder="Escriba un número"
-            required
-        >
-<label>materia:</label>
-<input 
-            type="text"
-            name="materia"
-            placeholder="Escriba una materia"
-            required>
-
-        <button type="submit">
-            Agregar
-        </button>
-
-    </form>
-
-
-    <!-- TABLA -->
-
-    <table>
-
-        <thead>
-
-            <tr>
-
-                <th>Nombre</th>
-
-                <th>Número</th>
-
-                <th>Materia</th>
-            </tr>
-
-        </thead>
-
-
-        <tbody>
-
-            <?php
-
-            while ($fila = $resultado->fetch_assoc()) {
-
-            ?>
-
-                <tr>
-
-                    <td>
-                        <?php echo $fila["nombre"]; ?>
-                    </td>
-
-
-                    <td>
-
-                        <!-- AQUÍ SE CREA EL BOTÓN -->
-
-                        <button type="button">
-
-                            <?php echo $fila["numero"]; ?>
-
-                        </button>
-
-                    </td>
-
-                    <td>
-                        <?php echo $fila["materia"]; ?>
-                    </td>
-
-                </tr>
-
-            <?php
-
-            }
-
-            ?>
-
-        </tbody>
-
-    </table>
-
+<main class="inicio">
+        <div class="contenido-inicio">
+            <h1>Organización Docente</h1>
+            <p>
+                Gestiona tus actividades académicas de manera organizada.
+            </p>
+            <div class="botones-inicio">
+                <a href="crear_cuenta.php" class="boton">
+                    Crear cuenta
+                </a>
+               <a href="iniciar_sesion.php" class="boton boton-secundario">
+                 Iniciar sesión
+                </a>
+            </div>
+        </div>
+    </main>
 
 </body>
-
 </html>
