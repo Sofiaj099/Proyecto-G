@@ -1,14 +1,14 @@
 <?php
-$servidor = "localhost";
+$host = "localhost";
 $usuario = "root";
-$password = "";
-$base_datos = "docentes"; // El nombre exacto de tu base de datos
+$clave = "";
+$bd = "docentes";
 
-// Aquí creamos la variable $conexion que el registro necesita
-$conexion = new mysqli($servidor, $usuario, $password, $base_datos);
+$conexion = mysqli_connect($host, $usuario, $clave, $bd);
 
-// Si hay un error de conexión, lo detenemos aquí
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+if (!$conexion) {
+    die("Error de conexión a la base de datos: " . mysqli_connect_error());
 }
+
+mysqli_set_charset($conexion, "utf8");
 ?>

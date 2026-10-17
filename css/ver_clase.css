@@ -1,0 +1,49 @@
+/* ==========================================================================
+   VER_CLASE.CSS - Estilos Exclusivos para ver_clase.php
+   ========================================================================== */
+
+/* 1. Barra de Opciones / Secciones */
+.barra-opciones {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #837bb9;
+    padding-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.boton-opcion {
+    background-color: transparent;
+    border: none;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #342e57;
+    cursor: pointer;
+    border-radius: 6px 6px 0 0;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.boton-opcion:hover {
+    background-color: #e6e2f3;
+}
+
+.boton-opcion.activa {
+    background-color: #837bb9;
+    color: #ffffff;
+}
+
+/* 2. Control de Visibilidad de Secciones */
+.contenido-seccion {
+    display: none;
+}
+
+.contenido-seccion.activa {
+    display: block;
+}
+
+/* 3. Caja del Codigo QR */
+#cajaQR {
+    border-top: 1px dashed #837bb9;
+    padding-top: 15px;
+}

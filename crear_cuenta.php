@@ -15,7 +15,7 @@
         <section class="tarjeta-registro">
 
             <div class="encabezado">
-                <h3>Crea tu cuenta para organizar todas tus actividades académicas en un solo lugar.</h3>
+                <h3><strong>Crea tu cuenta para organizar tus actividades académicas en un solo lugar</strong></h3>
             </div>
 
             <form action="  registrar.php" method="POST">
