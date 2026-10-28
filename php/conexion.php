@@ -1,14 +1,20 @@
+
 <?php
-$host = "localhost";
+$servidor = "localhost";
 $usuario = "root";
-$clave = "";
-$bd = "docentes";
+$contrasena = "";
+$base_datos = "docentes";
 
-$conexion = mysqli_connect($host, $usuario, $clave, $bd);
+$conexion = new mysqli(
+    $servidor,
+    $usuario,
+    $contrasena,
+    $base_datos
+);
 
-if (!$conexion) {
-    die("Error de conexión a la base de datos: " . mysqli_connect_error());
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
 }
 
-mysqli_set_charset($conexion, "utf8");
+$conexion->set_charset("utf8mb4");
 ?>

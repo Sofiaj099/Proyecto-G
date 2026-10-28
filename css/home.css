@@ -1,9 +1,8 @@
 /* ==========================================================================
-   HOME.CSS - Estilos Generales, Estructura y Componentes Compartidos
-   Paleta: Lavanda (#837bb9), Berenjena (#342e57), Crema (#fdf4e5), Blanco (#ffffff)
+   HOME.CSS - Estilos Generales y Componentes del Sistema
    ========================================================================== */
 
-/* 1. Variables de Color y Reset */
+/* 1. VARIABLES DE COLOR Y RESET GENERAL */
 :root {
     --color-lavanda: #837bb9;
     --color-berenjena: #342e57;
@@ -27,7 +26,7 @@ body {
     min-height: 100vh;
 }
 
-/* 2. Menu Lateral */
+/* 2. MENÚ LATERAL FIJO DE NAVEGACIÓN */
 .menu-lateral {
     width: 220px;
     background-color: var(--color-berenjena);
@@ -58,22 +57,23 @@ body {
     background-color: #484074;
 }
 
+/* Estado activo para resaltar la página actual */
 .lista-menu li a.activo {
     background-color: var(--color-lavanda);
     color: var(--color-blanco);
     font-weight: bold;
 }
 
-/* 3. Contenedor Principal */
+/* 3. CONTENEDOR PRINCIPAL DERECHO */
 .contenedor-principal {
     flex: 1;
-    margin-left: 220px;
+    margin-left: 220px; /* Desplaza el contenido para no quedar debajo del menú lateral */
     padding: 30px;
     background-color: var(--color-crema);
     min-height: 100vh;
 }
 
-/* 4. Diseno del Panel de Inicio (Columna Izquierda + Derecha) */
+/* 4. ESTRUCTURA EN DOS COLUMNAS PARA EL PANEL DE INICIO */
 .diseno-panel {
     display: flex;
     gap: 25px;
@@ -81,23 +81,19 @@ body {
     flex-wrap: wrap;
 }
 
+/* Columna izquierda: Ocupa el espacio principal para materias */
 .columna-izquierda {
     flex: 1;
     min-width: 320px;
 }
 
+/* Columna derecha: Ancho fijo para el cuadro lateral de recordatorios */
 .columna-derecha {
-    width: 320px;
+    width: 340px;
     min-width: 280px;
 }
 
-.columna-derecha h2,
-.columna-izquierda h2 {
-    color: var(--color-berenjena);
-    margin-bottom: 15px;
-}
-
-/* 5. Tarjetas de Materias y Grupos */
+/* 5. TARJETAS DE MATERIAS Y GRUPOS (DESPLEGABLES/ACORDEÓN) */
 .bloque-materia {
     background-color: var(--color-blanco);
     border-radius: 10px;
@@ -115,6 +111,7 @@ body {
     user-select: none;
 }
 
+/* Triángulo morado del acordeón */
 .titulo-materia .flecha {
     font-size: 0.8rem;
     color: var(--color-lavanda);
@@ -152,6 +149,7 @@ body {
     color: #666;
 }
 
+/* Botones para agregar nueva materia o grupo */
 .boton-crear,
 .boton-agregar-grupo {
     background-color: transparent;
@@ -175,34 +173,7 @@ body {
     background-color: var(--color-lavanda-claro);
 }
 
-/* 6. Rejilla 3x3 de Tareas Pendientes */
-.rejilla-pendientes {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.tarjeta-pendiente {
-    background-color: var(--color-blanco);
-    border: 1px solid var(--color-lavanda);
-    border-radius: 8px;
-    padding: 12px 8px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-}
-
-.tarjeta-pendiente h4 {
-    color: var(--color-berenjena);
-    font-size: 0.85rem;
-    margin-bottom: 5px;
-}
-
-.tarjeta-pendiente p {
-    color: #666;
-    font-size: 0.75rem;
-}
-
-/* 7. Contenedores Genericos y Formulario */
+/* 6. CONTENEDORES Y FORMULARIOS GENERALES */
 .seccion-detalle {
     background-color: var(--color-blanco);
     border-radius: 10px;
@@ -241,7 +212,7 @@ textarea:focus {
     box-shadow: 0 0 4px rgba(52, 46, 87, 0.2);
 }
 
-/* 8. Botones Generales */
+/* 7. BOTONES GENERALES DE ACCIÓN */
 .boton-guardar {
     background-color: var(--color-lavanda);
     color: var(--color-blanco);
@@ -256,17 +227,6 @@ textarea:focus {
 
 .boton-guardar:hover {
     background-color: var(--color-lavanda-oscuro);
-}
-
-.boton-cancelar {
-    background-color: #cccccc;
-    color: #333333;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 0.95rem;
 }
 
 .boton-volver {
@@ -287,7 +247,7 @@ textarea:focus {
     color: var(--color-blanco);
 }
 
-/* 9. Ventanas Modales */
+/* 8. VENTANAS MODALES EMERGENTES */
 .ventana-modal {
     display: none;
     position: fixed;
@@ -310,68 +270,312 @@ textarea:focus {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.contenido-modal h3 {
-    color: var(--color-berenjena);
-    margin-bottom: 15px;
-}
-
-.contenido-modal input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--color-lavanda);
-    border-radius: 6px;
-    margin-bottom: 15px;
-}
-
 .acciones-modal {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
 }
 
-/* 10. Tablas Generales (Estilo Excel Compartido) */
+/* 9. REJILLA 3X3 EN PÁGINA DE RECORDATORIOS (Izquierda a Derecha) */
+#listaRecordatorios {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    direction: ltr;
+}
+
+/* 10. CONTENEDOR DE RECORDATORIOS EN FILAS CON SCROLL EN PANEL.PHP */
+.contenedor-scroll-recordatorios {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 480px; /* Altura máxima con barra de desplazamiento si hay muchos recordatorios */
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* 11. TARJETA INDIVIDUAL DE RECORDATORIO Y BOTÓN ELIMINAR */
+.tarjeta-recordatorio {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-lavanda);
+    border-left: 4px solid var(--color-lavanda);
+    border-radius: 8px;
+    padding: 12px 15px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Botón pequeño de eliminación individual ('x') */
+.btn-eliminar-rec {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: transparent;
+    border: none;
+    color: #e53e3e;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-eliminar-rec:hover {
+    background-color: #fed7d7;
+    color: #9b2c2c;
+}
+
+/* ==========================================================================
+   ESTILIZACIÓN DE TABLAS DE ESTUDIANTES Y CALIFICACIONES
+   ========================================================================== */
+
+/* 1. CONTENEDOR CONTENEDOR CON BORDES REDONDEADOS Y SOMBRA */
+.contenedor-tabla {
+    width: 100%;
+    overflow-x: auto; /* Permite desplazamiento horizontal en pantallas pequeñas */
+    background-color: var(--color-blanco);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(52, 46, 87, 0.08);
+    border: 1px solid var(--color-lavanda-claro);
+    margin-top: 15px;
+}
+
+/* 2. ESTRUCTURA BASE DE LA TABLA */
 .tabla-excel {
     width: 100%;
-    border-collapse: collapse;
-    background-color: var(--color-blanco);
-    font-size: 0.9rem;
-    margin-top: 10px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.92rem;
+    color: var(--color-berenjena);
+    text-align: left;
 }
 
-.tabla-excel th,
-.tabla-excel td {
-    border: 1px solid var(--color-lavanda);
-    padding: 10px;
-    text-align: center;
-}
-
+/* 3. ENCABEZADOS DE LA TABLA (HEADER) */
 .tabla-excel th {
     background-color: var(--color-berenjena);
     color: var(--color-blanco);
-    font-weight: bold;
+    font-weight: 600;
+    padding: 14px 16px;
+    letter-spacing: 0.3px;
+    border-bottom: 2px solid var(--color-lavanda);
+    white-space: nowrap;
 }
 
+/* Redondear las esquinas superiores del encabezado */
+.tabla-excel thead tr:first-child th:first-child {
+    border-top-left-radius: 9px;
+}
+
+.tabla-excel thead tr:first-child th:last-child {
+    border-top-right-radius: 9px;
+}
+
+/* 4. CELDAS DE DATOS (FILAS DE ALUMNOS Y NOTAS) */
+.tabla-excel td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-lavanda-claro);
+    vertical-align: middle;
+    transition: background-color 0.2s ease;
+}
+
+/* Alternancia sutil de color Crema en filas pares */
 .tabla-excel tbody tr:nth-child(even) {
-    background-color: var(--color-crema);
+    background-color: rgba(253, 244, 229, 0.4);
 }
 
+/* Efecto al pasar el ratón sobre cualquier fila */
 .tabla-excel tbody tr:hover {
     background-color: var(--color-lavanda-claro);
 }
 
-.input-nota {
-    width: 65px;
-    padding: 5px;
-    text-align: center;
-    border: 1px solid var(--color-lavanda);
-    border-radius: 4px;
-    font-size: 0.9rem;
-    outline: none;
-    background-color: var(--color-blanco);
+/* Eliminar borde inferior de la última fila para no romper el redondeado */
+.tabla-excel tbody tr:last-child td {
+    border-bottom: none;
 }
 
+/* Centrar contenido numérico, columnas de notas e inputs */
+.tabla-excel th:not(:first-child),
+.tabla-excel td:not(:first-child) {
+    text-align: center;
+}
+
+/* 5. ESTILO MEJORADO PARA LOS CAMPOS DE ENTRADA DE NOTAS (INPUTS) */
+.input-nota {
+    width: 68px;
+    padding: 6px 8px;
+    text-align: center;
+    border: 1.5px solid var(--color-lavanda);
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-berenjena);
+    background-color: var(--color-blanco);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Brillo al enfocar el input de nota para escribir */
 .input-nota:focus {
     border-color: var(--color-berenjena);
+    box-shadow: 0 0 0 3px rgba(131, 123, 185, 0.25);
+    background-color: #ffffff;
+}
+
+/* 6. RESALTADO DE LA NOTA DEFINITIVA (ETIQUETA TIPO BADGE) */
+.tabla-excel td:last-child b {
+    display: inline-block;
+    padding: 4px 10px;
     background-color: var(--color-lavanda-claro);
+    color: var(--color-berenjena);
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   ESTILOS PARA TARJETAS Y ACCIONES DE OBSERVACIONES
+   ========================================================================== */
+
+/* Tarjeta individual de observación */
+.tarjeta-observacion {
+    background-color: var(--color-crema);
+    border-left: 4px solid var(--color-lavanda);
+    padding: 14px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+/* Botones de acción dentro de la tarjeta */
+.acciones-tarjeta-obs {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-accion-obs {
+    background: white;
+    border: 1px solid var(--color-lavanda);
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
     font-weight: bold;
+    cursor: pointer;
+    color: var(--color-berenjena);
+    transition: all 0.2s ease;
+}
+
+.btn-accion-obs:hover {
+    background-color: var(--color-lavanda-claro);
+}
+
+.btn-accion-obs.eliminar {
+    border-color: #f87171;
+    color: #dc2626;
+}
+
+.btn-accion-obs.eliminar:hover {
+    background-color: #fee2e2;
+}
+
+/* ==========================================================================
+   BOTONES DE EDICIÓN Y ELIMINACIÓN DE MATERIAS Y GRUPOS
+   ========================================================================== */
+
+/* Botones de acción pequeña para Materias y Grupos */
+.btn-materia-accion,
+.btn-grupo-accion {
+    background: var(--color-blanco);
+    border: 1px solid var(--color-lavanda);
+    color: var(--color-berenjena);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1.2;
+    transition: all 0.2s ease;
+}
+
+.btn-materia-accion:hover,
+.btn-grupo-accion:hover {
+    background-color: var(--color-lavanda-claro);
+}
+
+.btn-materia-accion.eliminar,
+.btn-grupo-accion.eliminar {
+    border-color: #f87171;
+    color: #dc2626;
+}
+
+.btn-materia-accion.eliminar:hover,
+.btn-grupo-accion.eliminar:hover {
+    background-color: #fee2e2;
+}
+
+/* Envoltorio del grupo para alinear los botones a la derecha */
+.tarjeta-clase-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   IGUALACIÓN DE BOTONES EN VENTANAS MODALES
+   ========================================================================== */
+.acciones-modal {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-top: 20px !important;
+}
+
+/* Regla unificada para que ambos botones tengan exactamente las mismas dimensiones */
+.acciones-modal .boton-volver,
+.acciones-modal .boton-guardar,
+.acciones-modal button {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 42px !important;          /* Misma altura para ambos */
+    padding: 0 20px !important;        /* Mismo relleno lateral */
+    font-size: 0.95rem !important;     /* Mismo tamaño de texto */
+    font-weight: bold !important;      /* Mismo grosor de texto */
+    border-radius: 6px !important;     /* Mismo redondeado de esquinas */
+    margin: 0 !important;              /* Elimina márgenes extra */
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+    line-height: 1 !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Estilo visual estandarizado para el botón Cancelar (Secundario) */
+.acciones-modal .boton-volver {
+    background-color: var(--color-lavanda-claro) !important;
+    color: var(--color-berenjena) !important;
+    border: 1px solid var(--color-lavanda) !important;
+}
+
+.acciones-modal .boton-volver:hover {
+    background-color: #d8d3e9 !important;
+}
+
+/* Estilo visual estandarizado para el botón Guardar (Principal) */
+.acciones-modal .boton-guardar {
+    background-color: var(--color-lavanda) !important;
+    color: var(--color-blanco) !important;
+    border: none !important;
+}
+
+.acciones-modal .boton-guardar:hover {
+    background-color: var(--color-lavanda-oscuro) !important;
 }

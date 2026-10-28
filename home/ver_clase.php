@@ -1,4 +1,11 @@
 <?php
+// Control de Sesión
+session_start();
+if (!isset($_SESSION['email'])) {
+    header("Location: ../iniciar_sesion.php");
+    exit;
+}
+
 $nombreClase = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Matemáticas 1°A';
 ?>
 <!DOCTYPE html>
@@ -21,7 +28,7 @@ $nombreClase = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Mat
         <li><a href="apuntes.php">Apuntes</a></li>
         <li><a href="recordatorios.php">Recordatorios</a></li>
         <li><a href="perfil.php">Tu perfil</a></li>
-        <li><a href="../iniciar_sesion.php">Cerrar Sesión</a></li>
+        <li><a href="../cerrar_sesion.php">Cerrar Sesión</a></li>
       </ul>
     </nav>
 
@@ -29,7 +36,7 @@ $nombreClase = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Mat
     <main class="contenedor-principal">
         <a href="panel.php" class="boton-volver">&larr; Volver al Panel</a>
         
-        <h1 style="margin-bottom: 15px; color: #342e57;"><?php echo $nombreClase; ?></h1>
+        <h1 style="margin-bottom: 15px; color: #342e57;" id="tituloNombreClase"><?php echo $nombreClase; ?></h1>
 
         <!-- Botones de Secciones -->
         <div class="barra-opciones">
@@ -57,30 +64,32 @@ $nombreClase = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Mat
 
             <div class="seccion-detalle">
                 <h2>Lista de Estudiantes Registrados</h2>
-                <table class="tabla-excel" style="margin-top: 10px;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nombre</th>
-                            <th>Apellido</th>
-                            <th>Documento</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Carlos</td>
-                            <td>Mendoza</td>
-                            <td>10023456</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Ana</td>
-                            <td>Gómez</td>
-                            <td>10087654</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="contenedor-tabla">
+                    <table class="tabla-excel">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Carlos</td>
+                                <td>Mendoza</td>
+                                <td>10023456</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ana</td>
+                                <td>Gómez</td>
+                                <td>10087654</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -89,10 +98,10 @@ $nombreClase = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Mat
             <div class="seccion-detalle">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                     <h2>Boletín de Calificaciones</h2>
-                    <button type="button" class="boton-guardar" style="font-size: 0.85rem;">+ Nueva Actividad</button>
+                    <button type="button" class="boton-guardar boton-nueva-columna" style="font-size: 0.85rem;">+ Nueva Actividad</button>
                 </div>
 
-                <div style="overflow-x: auto;">
+                <div class="contenedor-tabla">
                     <table class="tabla-excel">
                         <thead>
                             <tr>
@@ -129,58 +138,47 @@ $nombreClase = isset($_GET['nombre']) ? htmlspecialchars($_GET['nombre']) : 'Mat
         <!-- ================= SECCIÓN 3: OBSERVACIONES DEL MAESTRO ================= -->
         <div id="sec-apuntes" class="contenido-seccion">
             
-            <!-- Formulario para agregar una nueva observación -->
+            <!-- 1. PRIMERO: Historial de Observaciones Registradas (Ordenadas de más reciente a más antigua) -->
             <div class="seccion-detalle">
-                <h2>Nueva Observación o Nota de Clase</h2>
+                <h2>Historial de Observaciones</h2>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 15px;">
+                    Escribe las observaciones de cada clase! </p>
+                <div id="listaObservaciones" style="display: flex; flex-direction: column; gap: 12px;"></div>
+            </div>
+
+            <!-- 2. SEGUNDO: Formulario para Agregar / Editar Observaciones -->
+            <div class="seccion-detalle" style="margin-top: 25px;">
+                <h2 id="tituloFormObservacion">Nueva Observaciones de clase</h2>
                 <form id="formularioObservacion" style="margin-top: 15px;">
+                    <!-- ID oculto para saber si se está editando una nota existente -->
+                    <input type="hidden" id="editandoObsId" value="">
+
                     <div style="display: flex; gap: 15px; margin-bottom: 12px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 180px;">
+                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 5px; color: #342e57;">Fecha de la observación:</label>
+                            <input type="date" id="fechaNota" class="input-estilo" required>
+                        </div>
                         <div style="flex: 1; min-width: 200px;">
-                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 5px;">Fecha / Categoria:</label>
+                            <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 5px; color: #342e57;">Categoría:</label>
                             <input type="text" id="categoriaNota" class="input-estilo" placeholder="Ej. Tarea, Comportamiento, Repaso">
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 5px;">Detalle de la observación:</label>
-                        <textarea id="textoNota" placeholder="Escribe aquí los apuntes o notas sobre este grupo..."></textarea>
+                        <label style="font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 5px; color: #342e57;">Detalle de la observación:</label>
+                        <textarea id="textoNota" class="input-estilo" placeholder="Escribe aquí los apuntes o notas sobre este grupo..." required></textarea>
                     </div>
-                    <button type="submit" class="boton-guardar">Guardar Observación</button>
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button type="submit" id="btnGuardarObs" class="boton-guardar">Guardar Observación</button>
+                        <button type="button" id="btnCancelarEdicionObs" class="boton-volver" style="display: none; margin: 0;">Cancelar Edición</button>
+                    </div>
                 </form>
-            </div>
-
-            <!-- Historial de Observaciones Registradas -->
-            <div class="seccion-detalle">
-                <h2>Historial de Observaciones</h2>
-                <div id="listaObservaciones" style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
-                    <div style="background-color: #fdf4e5; border-left: 4px solid #837bb9; padding: 12px; border-radius: 6px;">
-                        <p style="font-size: 0.8rem; color: #666; margin-bottom: 4px;"><b>Rendimiento Taller</b> - 14 Octubre</p>
-                        <p style="font-size: 0.95rem; color: #342e57;">El grupo mostró excelente rendimiento en el taller de ecuaciones. Pendiente revisar el ejercicio 4 con Carlos y Ana.</p>
-                    </div>
-                </div>
             </div>
 
         </div>
 
     </main>
 
-    <script src="../js/script.js"></script>
-    <script>
-        // Función para cambiar de sección
-        function cambiarSeccion(evento, idSeccion) {
-            const contenidos = document.querySelectorAll('.contenido-seccion');
-            contenidos.forEach(c => c.classList.remove('activa'));
-
-            const botones = document.querySelectorAll('.boton-opcion');
-            botones.forEach(b => b.classList.remove('activa'));
-
-            document.getElementById(idSeccion).classList.add('activa');
-            if (evento) evento.currentTarget.classList.add('activa');
-        }
-
-        function mostrarQR() {
-            const caja = document.getElementById('cajaQR');
-            caja.style.display = (caja.style.display === "none" || caja.style.display === "") ? "block" : "none";
-        }
-    </script>
     <script src="../js/script.js"></script>
 </body>
 </html>
